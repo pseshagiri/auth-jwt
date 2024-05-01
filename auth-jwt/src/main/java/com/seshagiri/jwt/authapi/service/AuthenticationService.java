@@ -29,16 +29,16 @@ public class AuthenticationService {
 		
 		User user = new User();
 		user.setEmail(dto.getEmail());
-		user.setFullname(dto.getFullName());
-		user.setPassword(dto.getPassword());
+		user.setFullName(dto.getFullName());
+		user.setPassword(passwordEncoder.encode(dto.getPassword()));
 		return this.userRepo.save(user);
 	}
 	
 	public User autheticateUser(LoginDto dto) {
-		this.authenticationManager.authenticate(new 
+		authenticationManager.authenticate(new 
 				UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
 		
-	  return this.userRepo.findByEmail(dto.getEmail())
+	  return userRepo.findByEmail(dto.getEmail())
 			  .orElseThrow();
 	}
 

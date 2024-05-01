@@ -1,10 +1,14 @@
 package com.seshagiri.jwt.authapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties
 public class RegistrationDto {
 	
 	private String fullName;
 	private String email;
 	private String password;
+	
 	public String getFullName() {
 		return fullName;
 	}

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,21 +28,24 @@ public class User implements Serializable,UserDetails {
 	
 	@Id()
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = false)
 	private int id;
 	
-	@Column(name = "fullName",nullable = false)
-	private String fullname;
+	@Column(name = "fullName")
+	private String fullName;
 	
-	@Column(name = "email",nullable = false)
+	@Column(name = "email",unique = true,nullable = false)
 	private String email;
 	
-	@Column(name="password",nullable = false)
+	@Column(name="password")
 	private String password;
 	
-	@Column(name="createdAt",nullable = false)
+	@CreationTimestamp
+	@Column(name="createdAt",updatable = false)
 	private Date createdAt;
 	
-	@Column(name="updatedAt",nullable = false)
+	@UpdateTimestamp()
+	@Column(name="updatedAt")
 	private Date updatedAt;
 
 	public int getId() {
@@ -52,11 +57,11 @@ public class User implements Serializable,UserDetails {
 	}
 
 	public String getFullname() {
-		return fullname;
+		return fullName;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getEmail() {
@@ -106,25 +111,25 @@ public class User implements Serializable,UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 }

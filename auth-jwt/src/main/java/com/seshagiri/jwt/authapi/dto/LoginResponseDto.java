@@ -1,6 +1,8 @@
 package com.seshagiri.jwt.authapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties
 public class LoginResponseDto {
 	
 	private String token;
